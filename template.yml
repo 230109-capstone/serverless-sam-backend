@@ -19,6 +19,18 @@ Resources:
           Properties:
             Path: /test
             Method: get
+  ApproveDenyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: approve-deny-function/
+      Handler: index.handler
+      Runtime: nodejs16.x
+      Events:
+        Test:
+          Type: Api
+          Properties:
+            Path: /reimbursements/:id/status
+            Method: patch
 
 Outputs:
   Endpoint:
