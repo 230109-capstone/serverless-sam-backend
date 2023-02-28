@@ -62,7 +62,7 @@ async function authorizeFinanceManager(authorizationHeader) {
     }
 
     const token = authorizationHeader.split(" ")[1];
-    const payload = await verifyTokenAndReturnPayload(token);
+    const payload = await jwtUtil.verifyTokenAndReturnPayload(token);
 
     if (payload.role !== 'finance_manager') {
         throw new AuthorizationError(["Finance manager role required"]);
@@ -73,13 +73,13 @@ async function authorizeFinanceManager(authorizationHeader) {
 
 function verifyTokenAndReturnPayload(token) {
     return new Promise((resolve, reject) => {
-        jwt.verify(token, process.env.JWT_SIGNING_SECRET, (err, data) => {
-            if(err) {
-            reject(err);
-            } else {
-            resolve(data);
-            }
-        })
+      jwt.verify(token, process.env.JWT_SIGNING_SECRET, (err, data) => {
+        if(err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      })
     });
 }
 
