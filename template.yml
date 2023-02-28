@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: >-
+  230109 Serverless Project-3
+
+Transform:
+- AWS::Serverless-2016-10-31
+
+Resources:
+  TestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: test-function/
+      Handler: index.handler
+      Runtime: nodejs16.x
+      Events:
+        Test:
+          Type: Api
+          Properties:
+            Path: /test
+            Method: get
+
+Outputs:
+  Endpoint:
+    Description: "Endpoint for API Gateway"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
