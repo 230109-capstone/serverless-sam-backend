@@ -39,16 +39,16 @@ Resources:
       Runtime: nodejs16.x
       Policies:
         - DynamoDBCrudPolicy:
-          TableName: !Ref UsersTable
+            TableName: UsersTable
       Environment:
         Variables:
           USERS_TABLE_NAME: !Ref UsersTable
       Events:
-      ApiEvent:
-        Type: Api
-        Properties:
-          Path: /users
-          Method: post
+        Test:
+          Type: Api
+          Properties:
+            Path: /users
+            Method: post
 
   UsersTable:
     Type: AWS::DynamoDB::Table
