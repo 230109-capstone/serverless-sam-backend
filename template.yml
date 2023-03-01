@@ -31,6 +31,44 @@ Resources:
           Properties:
             Path: /reimbursements/:id/status
             Method: patch
+  AddReimbursements:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: add-reimbursements-function/
+      Handler: index.handler
+      Runtime: nodejs16.x
+      Events:
+        AddReimbursements:
+          Type: Api
+          Properties:
+            Path: /reimbursements
+            Method: post
+      Environment:
+        Variables:
+          REIMBURSEMENTS_TABLE_NAME: !Ref ReimbursementsTable
+          RECEIPTS_BUCKET_NAME: !Ref ReceiptsBucket
+          JWT_SIGNING_SECRET: psstthisisthesecret
+      Policies:
+        - Statement:
+            Effect: Allow
+            Action:
+             - dynamodb:PutItem
+            Resource: !GetAtt ReimbursementsTable.Arn
+        - S3WritePolicy:
+            BucketName: !Ref ReceiptsBucket
+  ReimbursementsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  ReceiptsBucket:
+    Type: AWS::S3::Bucket
 
 Outputs:
   Endpoint:
