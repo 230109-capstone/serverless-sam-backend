@@ -31,6 +31,18 @@ Resources:
           Properties:
             Path: /reimbursements/:id/status
             Method: patch
+  RegisterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: register-function/
+      Handler: index.handler
+      Runtime: nodejs16.x
+      Events:
+      Test:
+        Type: Api
+        Properties:
+          Path: /users
+          Method: post
 
 Outputs:
   Endpoint:
