@@ -32,6 +32,19 @@ Resources:
             Path: /reimbursements/:id/status
             Method: patch
 
+  ViewReimbursementFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: view-reimbursement-function/
+      Handler: index.handler
+      Runtime: nodejs16.x
+      Events:
+        Test:
+          Type: Api
+          Properties:
+            Path: /reimbursements
+            Method: get
+
 Outputs:
   Endpoint:
     Description: "Endpoint for API Gateway"
