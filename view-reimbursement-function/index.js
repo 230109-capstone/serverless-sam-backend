@@ -48,6 +48,7 @@ exports.handler = async (event) => {
   }
 };
 
+// check user's JWT and verify their role
 async function authorizeEmployeeOrFinanceManager(authorizationHeader) {
   if (!authorizationHeader) {
     throw new JsonWebTokenError('Token not provided');
@@ -63,6 +64,7 @@ async function authorizeEmployeeOrFinanceManager(authorizationHeader) {
   return payload;
 }
 
+// verify JWT and return the payload with user's role and username
 function verifyTokenAndReturnPayload(token) {
   return new Promise((resolve, reject) => {
     jwt.verify(token, process.env.JWT_SIGNING_SECRET, (err, data) => {
@@ -75,6 +77,7 @@ function verifyTokenAndReturnPayload(token) {
   });
 }
 
+// helper function to retrieve the appropriate reimbursements for each user role
 async function retrieveReimbursements(payload) {
   if (payload.role === 'finance_manager') {
     const data = await retrieveAllReimbursements();
@@ -85,6 +88,7 @@ async function retrieveReimbursements(payload) {
   }
 }
 
+// get all the reimbursements from the database
 function retrieveAllReimbursements() {
   return documentClient
     .scan({
@@ -93,6 +97,7 @@ function retrieveAllReimbursements() {
     .promise();
 }
 
+// get all the reimbursements that belong to the user from the database
 function retrieveAllReimbursementsByUsername(username) {
   return documentClient
     .query({
@@ -109,6 +114,7 @@ function retrieveAllReimbursementsByUsername(username) {
     .promise();
 }
 
+// customer error class that is thrown if user's role is invalid
 class AuthorizationError extends Error {
   constructor(errors) {
     super('Authorization Error');
