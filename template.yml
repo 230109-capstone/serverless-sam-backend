@@ -32,14 +32,14 @@ Resources:
             Path: /reimbursements/:id/status
             Method: patch
 
-  ViewReimbursementFunction:
+  ViewReimbursementsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: view-reimbursement-function/
+      CodeUri: view-reimbursements-function/
       Handler: index.handler
       Runtime: nodejs16.x
       Events:
-        Test:
+        ViewReimbursements:
           Type: Api
           Properties:
             Path: /reimbursements
