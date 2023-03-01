@@ -2,6 +2,10 @@ const bcrypt = require('bcrypt');
 const AWS = require('aws-sdk');
 const documentClient = new AWS.DynamoDB.DocumentClient();
 
+AWS.config.update({
+    region: 'us-east-1'
+});
+
 class RegistrationError extends Error {
     constructor(errors) {
       super('Registration Error');
