@@ -37,6 +37,7 @@ Resources:
       CodeUri: add-reimbursements-function/
       Handler: index.handler
       Runtime: nodejs16.x
+      Timeout: 60
       Events:
         AddReimbursements:
           Type: Api
