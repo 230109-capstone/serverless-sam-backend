@@ -83,6 +83,16 @@ Resources:
           Properties:
             Path: /reimbursements
             Method: get
+      Environment:
+          Variables:
+            REIMBURSEMENTS_TABLE_NAME: !Ref ReimbursementsTable
+            RECEIPTS_BUCKET_NAME: !Ref ReceiptsBucket
+            JWT_SIGNING_SECRET: psstthisisthesecret
+        Policies:
+          - DynamoDBCrudPolicy:
+              TableName: !Ref ReimbursementsTable
+          - S3ReadPolicy:
+              BucketName: !Ref ReceiptsBucket
 
 Outputs:
   Endpoint:
