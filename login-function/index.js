@@ -1,14 +1,7 @@
-const AWS = require('aws-sdk');
-const documentClient = new AWS.DynamoDB.DocumentClient();
-const bcrypt = require('bcrypt');
+const loginDAO = require('./login-dao')
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
-class LoginError extends Error {
-    constructor(errors) {
-      super("Login Error");
-      this.errors = errors;
-    }
-  }
+const LoginError = require('./login-errors')
 
 
 exports.handler = async (event, context) => {
@@ -45,7 +38,7 @@ exports.handler = async (event, context) => {
 
 //Login function
 async function login(username, password) {
-    const data = await retrieveUserByUsername(username);
+    const data = await loginDAO.retrieveUserByUsername(username);
 
     const errors = [];
     if (!data.Item) {
@@ -69,14 +62,4 @@ function createToken(username, role) {
     }, process.env.JWT_SIGNING_SECRET)
 }
 
-//DynamoDB query for user
-async function retrieveUserByUsername(username) {
-    return documentClient.get({
-        TableName: 'users',
-        Key: {
-            username: username
-        }
-    }).promise();
-}
-
-module.exports = {retrieveUserByUsername, login};
+module.exports = {login};
