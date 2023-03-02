@@ -45,7 +45,7 @@ exports.handler = async (event) => {
               })
             }
         }
-        
+
         return{
           statusCode: 500,
           body: JSON.stringify({
@@ -74,10 +74,10 @@ async function register(username, password) {
     }
     
     // Check if username is already taken
-   /* const data = await retrieveUserByUsername(username);
+    const data = await retrieveUserByUsername(username);
     if (data.Item) {
       errorMessages.push('Username is already taken');
-    }*/
+    }
   
     if (errorMessages.length > 0) {
       throw new RegistrationError(errorMessages);
