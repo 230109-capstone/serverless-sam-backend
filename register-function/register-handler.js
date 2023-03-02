@@ -9,6 +9,7 @@ const documentClient = new AWS.DynamoDB.DocumentClient();
 
 
 const table = process.env.USERS_TABLE;
+console.log(`users table is ${table}`);
 
 class RegistrationError extends Error {
     constructor(errors) {

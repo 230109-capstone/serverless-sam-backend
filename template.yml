@@ -43,11 +43,8 @@ Resources:
       Handler: register-handler.handler
       Runtime: nodejs16.x
       Policies:
-        - Statement:
-            Effect: Allow
-            Action:
-             - dynamodb:PutItem
-            Resource: !GetAtt UsersTable.Arn
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UsersTable
       Environment:
         Variables:
           USERS_TABLE: !Ref UsersTable
