@@ -31,6 +31,18 @@ Resources:
           Properties:
             Path: /reimbursements/:id/status
             Method: patch
+  LoginFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: login-function/
+      Handler: index.handler
+      Runtime: nodejs16.x
+      Events:
+        Test:
+          Type: Api
+          Properties:
+            Path: /login
+            Method: post
   AddReimbursements:
     Type: AWS::Serverless::Function
     Properties:
@@ -108,8 +120,6 @@ Resources:
 
   ReceiptsBucket:
     Type: AWS::S3::Bucket
-
-  
 
 Outputs:
   Endpoint:
