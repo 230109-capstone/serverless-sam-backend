@@ -7,8 +7,8 @@ const { authorizeEmployeeOrFinanceManager, retrieveReimbursements } = require('.
 
 exports.handler = async (event) => {
   try {
-    console.log(event);
-    const payload = await authorizeEmployeeOrFinanceManager(event.headers.authorization);
+    console.log(event.headers.Authorization);
+    const payload = await authorizeEmployeeOrFinanceManager(event.headers.Authorization);
     const reimbursements = await retrieveReimbursements(payload);
 
     return {
@@ -32,7 +32,7 @@ exports.handler = async (event) => {
       return {
         statusCode: 401,
         body: JSON.stringify({
-          message: error.errors,
+          message: error.message,
         }),
       };
     }
