@@ -1,10 +1,12 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const AWS = require('aws-sdk');
 const documentClient = new AWS.DynamoDB.DocumentClient();
 
 AWS.config.update({
     region: 'us-east-1'
 });
+
+const table = process.env.UsersTable;
 
 class RegistrationError extends Error {
     constructor(errors) {
@@ -33,16 +35,21 @@ exports.handler = async (event) => {
         };
     } catch(err){
         if (err instanceof RegistrationError) {
-            return res.status(400).send({
-              "errors": err.errors
-            });
+            return {
+              statusCode: 400,
+              body: JSON.stringify({
+                "errors": [ err.message ]
+              })
+            }
         }
-      
-        return res.status(500).send({
-            "errors": [ err.message ]
-        });
 
-    }
+        return{
+          statusCode: 500,
+          body: JSON.stringify({
+            "errors": [err.message]
+          })
+        }
+      }
 }
 
 async function register(username, password) {
@@ -86,7 +93,7 @@ async function register(username, password) {
 
 function retrieveUserByUsername(username) {
     return documentClient.get({
-      TableName: 'users',
+      TableName: table,
       Key: {
         username: username
       }
@@ -95,7 +102,7 @@ function retrieveUserByUsername(username) {
 
 function addUser(userObj) {
     return documentClient.put({
-      TableName: 'users',
+      TableName: table,
       Item: userObj
     }).promise();
 }
