@@ -43,27 +43,20 @@ Resources:
       Handler: register-handler.handler
       Runtime: nodejs16.x
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref UsersTable
+        - Statement:
+            Effect: Allow
+            Action:
+             - dynamodb:PutItem
+            Resource: !GetAtt UsersTable.Arn
       Environment:
         Variables:
-          UsersTable: !Ref UsersTable
+          USERS_TABLE: !Ref UsersTable
       Events:
         Register:
           Type: Api
           Properties:
             Path: /users
             Method: post
-  UsersTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: username
-          AttributeType: S
-      KeySchema:
-        - AttributeName: username
-          KeyType: HASH
-      BillingMode: PAY_PER_REQUEST
   LoginFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -147,6 +140,16 @@ Resources:
               - description
               - status
             ProjectionType: INCLUDE
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: username
+          AttributeType: S
+      KeySchema:
+        - AttributeName: username
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
   ReceiptsBucket:
     Type: AWS::S3::Bucket
 
