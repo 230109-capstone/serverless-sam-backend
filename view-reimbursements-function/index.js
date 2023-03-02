@@ -92,7 +92,7 @@ async function retrieveReimbursements(payload) {
 function retrieveAllReimbursements() {
   return documentClient
     .scan({
-      TableName: 'reimbursements',
+      TableName: process.env.REIMBURSEMENTS_TABLE_NAME,
     })
     .promise();
 }
@@ -101,8 +101,8 @@ function retrieveAllReimbursements() {
 function retrieveAllReimbursementsByUsername(username) {
   return documentClient
     .query({
-      TableName: 'reimbursements',
-      IndexName: 'submitter-index',
+      TableName: process.env.REIMBURSEMENTS_TABLE_NAME,
+      IndexName: 'submitterIndex',
       KeyConditionExpression: '#s = :user',
       ExpressionAttributeNames: {
         '#s': 'submitter',
