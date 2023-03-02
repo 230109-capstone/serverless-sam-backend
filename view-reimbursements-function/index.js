@@ -19,20 +19,20 @@ exports.handler = async (event) => {
       }),
     };
   } catch (error) {
-    if (err instanceof JsonWebTokenError) {
+    if (error instanceof JsonWebTokenError) {
       return {
         statusCode: 401,
         body: JSON.stringify({
-          message: err.message,
+          message: error.message,
         }),
       };
     }
 
-    if (err instanceof AuthorizationError) {
+    if (error instanceof AuthorizationError) {
       return {
         statusCode: 401,
         body: JSON.stringify({
-          message: err.errors,
+          message: error.errors,
         }),
       };
     }
@@ -40,7 +40,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        errors: [err.message],
+        message: error.message,
       }),
     };
   }
