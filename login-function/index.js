@@ -1,12 +1,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const {retrieveUserByUsername} = require('./login-dao');
+const LoginError = require('./login-errors')
 
-class LoginError extends Error {
-    constructor(errors) {
-      super("Login Error");
-      this.errors = errors;
-    }
-  }
 
 exports.handler = async (event) => {
    
@@ -40,6 +36,13 @@ exports.handler = async (event) => {
 
 }
 
+function createToken(username, role) {
+  return jwt.sign({
+    username: username,
+    role: role
+  }, process.env.JWT_SIGNING_SECRET)
+}
+
 async function login(username, password) {
     const data = await userDao.retrieveUserByUsername(username);
   
@@ -55,15 +58,6 @@ async function login(username, password) {
     }
   
     return jwtUtil.createToken(data.Item.username, data.Item.role);
-  }
-
-
-
-  function createToken(username, role) {
-    return jwt.sign({
-      username: username,
-      role: role
-    }, process.env.JWT_SIGNING_SECRET)
   }
 
 
