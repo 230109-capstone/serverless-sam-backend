@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const AWS = require('aws-sdk');
+const RegistrationError = require('./register-errors');
 
 AWS.config.update({
     region: 'us-east-1'
@@ -10,13 +11,6 @@ const documentClient = new AWS.DynamoDB.DocumentClient();
 
 const table = process.env.USERS_TABLE;
 console.log(`users table is ${table}`);
-
-class RegistrationError extends Error {
-    constructor(errors) {
-      super('Registration Error');
-      this.errors = errors;
-    }
-}
 
 exports.handler = async (event) => {
     try{
