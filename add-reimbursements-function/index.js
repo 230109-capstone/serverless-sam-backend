@@ -9,16 +9,16 @@ exports.handler = async (event) => {
     const bodyObject = JSON.parse(event.body);
 
     try {
-      const payload = await authService.authorizeEmployee(event.headers.authorization);
+      //const payload = await authService.authorizeEmployee(event.headers.authorization);
   
-      await reimbService.addReimbursement(payload.username, bodyObject);
+      await reimbService.addReimbursement(bodyObject);
   
       return response = {
         'statusCode': 200,
         headers: {
-          'Access-Control-Allow-Origin' : '*',
-          'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+          "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+          "Access-Control-Allow-Origin" : "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
         'body': JSON.stringify({
             message: 'Reimbursement successfully added',
@@ -29,9 +29,9 @@ exports.handler = async (event) => {
         return {
             statusCode: 401,
             headers: {
-              'Access-Control-Allow-Origin' : '*',
-              'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-              "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+              "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+              "Access-Control-Allow-Origin" : "*",
+              "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
             },
             body: JSON.stringify({
                 "message": err.message
@@ -42,11 +42,11 @@ exports.handler = async (event) => {
       if (err instanceof AuthorizationError) {
         return {
             statusCode: 401,
-              headers: {
-                'Access-Control-Allow-Origin' : '*',
-                'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-                "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-              },
+            headers: {
+              "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+              "Access-Control-Allow-Origin" : "*",
+              "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            },
             body: JSON.stringify({
                 "message": err.message
             })
@@ -57,9 +57,9 @@ exports.handler = async (event) => {
         return {
             statusCode: 400,
             headers: {
-              'Access-Control-Allow-Origin' : '*',
-              'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-              "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+              "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+              "Access-Control-Allow-Origin" : "*",
+              "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
             },
             body: JSON.stringify({
                 "message": err.message
@@ -70,13 +70,19 @@ exports.handler = async (event) => {
       return {
         statusCode: 500,
         headers: {
-          'Access-Control-Allow-Origin' : '*',
-          'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+          "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+          "Access-Control-Allow-Origin" : "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
-        body: JSON.stringify({
+        body: JSON.stringify({ 
             "message": err.message
         })
       }
     }
 };
+
+/*headers: {
+  'Access-Control-Allow-Origin' : '*',
+  'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+},*/
