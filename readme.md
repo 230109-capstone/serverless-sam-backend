@@ -7,7 +7,7 @@
 - Modules used to run the project include jest to test the functions, other packages used to run this program are bcrypt to encrypt passwords, aws-sdk to connect to our AWS services, jsonwebtoken to determine the user and their role, uuid to create unique ids for reimbursements, and file-type-cjs to create jpg and png files.
 ## Accessing API Gateway
 - Link to 
-    [API Gateway](http://bdx5a9kkg3.execute-api.us-east-1.amazonaws.com/Prod/)
+    [API Gateway](https://3z3bsyt5aa.execute-api.us-east-1.amazonaws.com/Prod/)
 
 ## Data Access Layer
 - Users Table Functions
