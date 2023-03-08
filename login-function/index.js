@@ -16,11 +16,13 @@ exports.handler = async (event) => {
 
     const token = await login(username, password);
 
-    return ({
-      statusCode: 200,
-      "message": "Login successful",
-      "token": token
-    });
+    return {
+        statusCode: 200,
+        body: JSON.stringify({
+          message: "Login successful",
+          token: token
+        })
+      };
   } catch (err) {
     if (err instanceof LoginError) {
       return ({
