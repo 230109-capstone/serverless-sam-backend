@@ -17,7 +17,7 @@ exports.handler = async (event) => {
         'Access-Control-Allow-Headers':
           'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+        'Access-Control-Allow-Methods': 'OPTIONS, GET',
       },
       body: JSON.stringify({
         message: 'Reimbursements successfully retrieved',
@@ -32,7 +32,7 @@ exports.handler = async (event) => {
           'Access-Control-Allow-Headers':
             'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+          'Access-Control-Allow-Methods': 'OPTIONS, GET',
         },
         body: JSON.stringify({
           message: error.message,
@@ -47,7 +47,7 @@ exports.handler = async (event) => {
           'Access-Control-Allow-Headers':
             'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+          'Access-Control-Allow-Methods': 'OPTIONS, GET',
         },
         body: JSON.stringify({
           message: error.message,
@@ -61,7 +61,7 @@ exports.handler = async (event) => {
         'Access-Control-Allow-Headers':
           'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+        'Access-Control-Allow-Methods': 'OPTIONS, GET',
       },
       body: JSON.stringify({
         message: error.message,
