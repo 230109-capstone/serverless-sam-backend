@@ -1,12 +1,17 @@
 const AWS = require('aws-sdk');
 const { register } = require('./register-handler-service')
 const RegistrationError = require('./errors/registration-error')
+const cors = require("cors");
+
+const corsOptions = {
+    origin: "*"
+}
 
 AWS.config.update({
     region: 'us-east-1'
 });
 
-exports.handler = async (event) => {
+exports.handler = cors(corsOptions)(async (event) => {
     try{
         const parsedBody = JSON.parse(event.body);
         const username = parsedBody.username;
@@ -56,4 +61,4 @@ exports.handler = async (event) => {
           })
         }
       }
-}
+})
