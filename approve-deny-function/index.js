@@ -1,6 +1,8 @@
 const AWS = require('aws-sdk');
+const jwt = require('jsonwebtoken');
 const documentClient = new AWS.DynamoDB.DocumentClient();
-const jwtUtil = require('./jwtUtil');
+const ReimbursementError = require('./errors');
+const AuthorizationError = require('./errors');
 
 exports.handler = async (event, context) => {
     const path = event.pathParameters;

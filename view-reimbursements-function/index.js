@@ -13,6 +13,12 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Headers':
+          'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+      },
       body: JSON.stringify({
         message: 'Reimbursements successfully retrieved',
         data: reimbursements,
@@ -22,6 +28,12 @@ exports.handler = async (event) => {
     if (error instanceof JsonWebTokenError) {
       return {
         statusCode: 401,
+        headers: {
+          'Access-Control-Allow-Headers':
+            'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+        },
         body: JSON.stringify({
           message: error.message,
         }),
@@ -31,6 +43,12 @@ exports.handler = async (event) => {
     if (error instanceof AuthorizationError) {
       return {
         statusCode: 401,
+        headers: {
+          'Access-Control-Allow-Headers':
+            'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+        },
         body: JSON.stringify({
           message: error.message,
         }),
@@ -39,6 +57,12 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Headers':
+          'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+      },
       body: JSON.stringify({
         message: error.message,
       }),
