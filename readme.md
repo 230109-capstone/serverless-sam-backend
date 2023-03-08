@@ -1,7 +1,14 @@
 # Startup
+# Employee Reimbursement System
+## Capstone Project Backend
+## Description
+- The backend for the capstone project is a serverless application built with AWS lambda and accessed with API Gateway. The program is divided into individual functions that can be accessed with different URLs in API Gateway. Includes functions to add reimbursements, approve/deny reimbursements, view reimbursements, login, and register new users. Uses information from dynamoDB table to provide responses, and we can add or modify data in the tables. Also the project uses an S3 bucket to create images of reimbursements to display on a webpage.
+
+- Modules used to run the project include jest to test the functions, other packages used to run this program are bcrypt to encrypt passwords, aws-sdk to connect to our AWS services, jsonwebtoken to determine the user and their role, uuid to create unique ids for reimbursements, and file-type-cjs to create jpg and png files.
 ## Accessing API Gateway
 - Link to 
     [API Gateway](http://bdx5a9kkg3.execute-api.us-east-1.amazonaws.com/Prod/)
+
 ## Data Access Layer
 - Users Table Functions
 1. retrieveUserByUsername
