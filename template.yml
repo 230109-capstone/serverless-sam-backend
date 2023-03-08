@@ -64,8 +64,15 @@ Resources:
       CodeUri: login-function/
       Handler: index.handler
       Runtime: nodejs16.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UsersTable
+      Environment:
+        Variables:
+          USERS_TABLE: !Ref UsersTable
+          JWT_SIGNING_SECRET: psstthisisthesecret
       Events:
-        Test:
+        Login:
           Type: Api
           Properties:
             Path: /login
