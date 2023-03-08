@@ -16,6 +16,7 @@ exports.handler = async (event) => {
 
     const token = await login(username, password);
 
+
     return ({
       statusCode: 200,
       headers: {
@@ -28,6 +29,7 @@ exports.handler = async (event) => {
         "token": token
       }),
     });
+
   } catch (err) {
     if (err instanceof LoginError) {
       return ({

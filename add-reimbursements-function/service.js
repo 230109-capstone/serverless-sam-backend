@@ -11,7 +11,7 @@ const jwtUtil = require('./utility');
 const AuthorizationError = require('./errors');
 const { JsonWebTokenError } = require('jsonwebtoken');
 
-async function addReimbursement(username, reimbursement) {
+async function addReimbursement(reimbursement) {
     const errors = [];
     // Make sure reimbursement amount > 0
     if (reimbursement.amount <= 0) {
@@ -36,7 +36,7 @@ async function addReimbursement(username, reimbursement) {
     }
   
     const reimbId = uuid.v4();
-    await reimbDao.addReimbursement(reimbId, reimbursement.amount, reimbursement.description, "pending", username);
+    await reimbDao.addReimbursement(reimbId, reimbursement.amount, reimbursement.description, "pending", "username2");
     await s3Dao.addReimbursementImage(reimbId, imageBuffer, ext)
   }
 
