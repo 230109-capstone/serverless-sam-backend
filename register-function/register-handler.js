@@ -39,7 +39,7 @@ exports.handler = async (event) => {
                 "Access-Control-Allow-headers": "Content-Type", 
             },
               body: JSON.stringify({
-                "errors": [ err.message ]
+                "errors": err.errors
               })
             }
         }
