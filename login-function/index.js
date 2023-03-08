@@ -18,25 +18,13 @@ exports.handler = async (event) => {
 
     return ({
       statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS, POST",
-        "Access-Control-Allow-headers": "Content-Type", 
-    },
-      body: JSON.stringify({
-        "message": "Login successful",
-      }),
+      "message": "Login successful",
       "token": token
     });
   } catch (err) {
     if (err instanceof LoginError) {
       return ({
         statusCode: 400,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "OPTIONS, POST",
-          "Access-Control-Allow-headers": "Content-Type", 
-      },
         body: JSON.stringify({
           "errors": [err.message]
         })
@@ -45,11 +33,6 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 500,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS, POST",
-        "Access-Control-Allow-headers": "Content-Type", 
-    },
       body: JSON.stringify({
         "errors": [err.message]
       })
