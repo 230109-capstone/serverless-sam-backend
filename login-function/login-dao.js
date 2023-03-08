@@ -5,10 +5,11 @@ AWS.config.update({
 });
 
 const documentClient = new AWS.DynamoDB.DocumentClient();
+const table = process.env.USERS_TABLE;
 
 async function retrieveUserByUsername(username) {
     return documentClient.get({
-        TableName: 'users',
+        TableName: table,
         Key: {
             username: username
         }

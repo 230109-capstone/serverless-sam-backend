@@ -1,15 +1,9 @@
 // login-service.js
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const {retrieveUserByUsername} = require('./login-dao');
 const LoginError = require('./login-errors')
+const {createToken} = require('./login-util')
 
-function createToken(username, role) {
-  return jwt.sign({
-    username: username,
-    role: role
-  }, process.env.JWT_SIGNING_SECRET)
-}
 
 async function login(username, password) {
     const data = await retrieveUserByUsername(username);
