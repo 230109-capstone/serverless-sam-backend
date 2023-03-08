@@ -19,6 +19,11 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "OPTIONS, POST",
+              "Access-Control-Allow-headers": "Content-Type", 
+          },
             body: JSON.stringify({
                 "message": "User successfully registered"
             })
@@ -27,6 +32,11 @@ exports.handler = async (event) => {
         if (err instanceof RegistrationError) {
             return {
               statusCode: 400,
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS, POST",
+                "Access-Control-Allow-headers": "Content-Type", 
+            },
               body: JSON.stringify({
                 "errors": [ err.message ]
               })
@@ -35,6 +45,11 @@ exports.handler = async (event) => {
 
         return{
           statusCode: 500,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS, POST",
+            "Access-Control-Allow-headers": "Content-Type", 
+        },
           body: JSON.stringify({
             "errors": [err.message]
           })
