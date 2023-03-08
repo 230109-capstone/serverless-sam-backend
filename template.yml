@@ -58,25 +58,25 @@ Resources:
           Properties:
             Path: /users
             Method: post
-  LoginFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: login-function/
-      Handler: index.handler
-      Runtime: nodejs16.x
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref UsersTable
-      Environment:
-        Variables:
-          USERS_TABLE: !Ref UsersTable
-          JWT_SIGNING_SECRET: psstthisisthesecret
-      Events:
-        Login:
-          Type: Api
-          Properties:
-            Path: /login
-            Method: post
+  # LoginFunction:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     CodeUri: login-function/
+  #     Handler: index.handler
+  #     Runtime: nodejs16.x
+  #     Policies:
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref UsersTable
+  #     Environment:
+  #       Variables:
+  #         USERS_TABLE: !Ref UsersTable
+  #         JWT_SIGNING_SECRET: psstthisisthesecret
+  #     Events:
+  #       Login:
+  #         Type: Api
+  #         Properties:
+  #           Path: /login
+  #           Method: post
   AddReimbursements:
     Type: AWS::Serverless::Function
     Properties:
