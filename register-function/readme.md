@@ -6,7 +6,7 @@ Request
 - HTTP Method
     - Post
 - URL
-    - /register
+    - /users
 - Headers
     - Content-Type: application/json
 - Body
