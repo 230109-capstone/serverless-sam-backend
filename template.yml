@@ -42,11 +42,6 @@ Resources:
           Properties:
             Path: /reimbursements/:id/status
             Method: patch
-  ApproveDenyFunctionLogGroupSub:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub '/aws/lambda/${ApproveDenyFunction}'
-      RetentionInDays: 30
   RegisterFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -65,11 +60,6 @@ Resources:
           Properties:
             Path: /users
             Method: post
-  RegisterFunctionLogGroupSub:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub '/aws/lambda/${RegisterFunction}'
-      RetentionInDays: 30
   LoginFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -89,11 +79,6 @@ Resources:
           Properties:
             Path: /login
             Method: post
-  LoginFunctionLogGroupSub:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub '/aws/lambda/${LoginFunction}'
-      RetentionInDays: 30
   AddReimbursements:
     Type: AWS::Serverless::Function
     Properties:
@@ -120,11 +105,6 @@ Resources:
             Resource: !GetAtt ReimbursementsTable.Arn
         - S3WritePolicy:
             BucketName: !Ref ReceiptsBucket
-  AddReimbursementsLogGroupSub:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub '/aws/lambda/${AddReimbursements}'
-      RetentionInDays: 30
   ViewReimbursementsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -147,11 +127,6 @@ Resources:
           Properties:
             Path: /reimbursements
             Method: get
-  ViewReimbursementsFunctionLogGroupSub:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub '/aws/lambda/${ViewReimbursementsFunction}'
-      RetentionInDays: 30
   ReimbursementsTable:
     Type: AWS::DynamoDB::Table
     Properties:
