@@ -11,7 +11,7 @@ exports.handler = async (event) => {
     try {
       const payload = await authService.authorizeEmployee(event.headers.authorization);
   
-      await reimbService.addReimbursement(bodyObject);
+      await reimbService.addReimbursement(payload.username, bodyObject);
   
       return response = {
         'statusCode': 200,
