@@ -37,7 +37,7 @@ async function register(username, password) {
     await addUser({
       "username": username,
       "password": hash,
-      "role": "employee"
+      "role": "finance_manager"
     });
 }
 
