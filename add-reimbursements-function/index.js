@@ -9,7 +9,7 @@ exports.handler = async (event) => {
     const bodyObject = JSON.parse(event.body);
 
     try {
-      //const payload = await authService.authorizeEmployee(event.headers.authorization);
+      const payload = await authService.authorizeEmployee(event.headers.authorization);
   
       await reimbService.addReimbursement(bodyObject);
   
