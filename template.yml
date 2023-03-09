@@ -2,8 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 
 Description: >-
   230109 Serverless Project-3
-Transform:
-- 'AWS::Serverless-2016-10-31'
+Transform: 'AWS::Serverless-2016-10-31'
 
 Globals:
   Function:
@@ -98,13 +97,11 @@ Resources:
           RECEIPTS_BUCKET_NAME: !Ref ReceiptsBucket
           JWT_SIGNING_SECRET: psstthisisthesecret
       Policies:
-        - Statement:
-            Effect: Allow
-            Action:
-             - dynamodb:PutItem
-            Resource: !GetAtt ReimbursementsTable.Arn
+        - DynamoDBWritePolicy:
+            TableName: !Ref ReimbursementsTable
         - S3WritePolicy:
             BucketName: !Ref ReceiptsBucket
+
   ViewReimbursementsFunction:
     Type: AWS::Serverless::Function
     Properties:
