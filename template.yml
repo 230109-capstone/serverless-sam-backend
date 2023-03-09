@@ -92,6 +92,9 @@ Resources:
           Properties:
             Path: /reimbursements
             Method: GET
+            CORS: true
+              
+              
         Options:
           Type: Api
           Properties:
