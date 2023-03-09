@@ -124,7 +124,12 @@ Resources:
           Type: Api
           Properties:
             Path: /reimbursements
-            Method: get
+            Method: GET
+        Options:
+          Type: Api
+          Properties:
+            Path: /reimbursements
+            Method: OPTIONS
   ReimbursementsTable:
     Type: AWS::DynamoDB::Table
     Properties:
