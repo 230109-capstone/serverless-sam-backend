@@ -1,0 +1,93 @@
+{
+    "pipeline": {
+        "name": "serverless-backend-pipeline",
+        "roleArn": "arn:aws:iam::168116352293:role/serverless-backend-pipeline-role",
+        "artifactStore": {
+            "type": "S3",
+            "location": "trng-1558-serverless-backend-pipeline"
+        },
+        "stages": [
+            {
+                "name": "Source",
+                "actions": [
+                    {
+                        "name": "Source",
+                        "actionTypeId": {
+                            "category": "Source",
+                            "owner": "ThirdParty",
+                            "provider": "GitHub",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "Owner": "bach-tran",
+                            "Repo": "serverless-sam-backend",
+                            "Branch": "main",
+                            "OAuthToken": "{{resolve:ssm:/my/github/oauth/token:1}}"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "SourceOutput"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Build",
+                "actions": [
+                    {
+                        "name": "Build",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "provider": "CodeBuild",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "ProjectName": "serverless-sam-backend"
+                        },
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceOutput"
+                            }
+                        ],
+                        "outputArtifacts": [
+                            {
+                                "name": "BuildOutput"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Deploy",
+                "actions": [
+                    {
+                        "name": "DeployAction",
+                        "actionTypeId": {
+                            "category": "Deploy",
+                            "owner": "AWS",
+                            "provider": "CloudFormation",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "ActionMode": "CREATE_UPDATE",
+                            "StackName": "my-stack",
+                            "TemplatePath": "BuildOutput::packaged.yaml",
+                            "Capabilities": "CAPABILITY_IAM",
+                            "ParameterOverrides": "{\"ParameterKey\":\"Value\"}"
+                        },
+                        "inputArtifacts": [
+                            {
+                                "name": "BuildOutput"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

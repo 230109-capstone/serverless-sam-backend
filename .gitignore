@@ -1,3 +1,5 @@
 .aws-sam/
 node_modules/
 .history/
+.vscode/
+coverage/
