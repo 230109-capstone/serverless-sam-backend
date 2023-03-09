@@ -16,14 +16,6 @@ Globals:
       AllowOrigin: "'*'"
 
 Resources:
-  item01:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: Prod
-      Cors:
-        AllowMethods: "'POST,GET,OPTIONS'"
-        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-        AllowOrigin: "'*'"
 
   TestFunction:
     Type: AWS::Serverless::Function
@@ -133,15 +125,8 @@ Resources:
           Type: Api
           Properties:
             Path: /reimbursements
-            Method: GET
-            RestApiId: !Ref item01     
-        Options:
-          Type: Api
-          Properties:
-            Path: /reimbursements
-            Method: OPTIONS
-            RestApiId: !Ref item01
-            
+            Method: get
+
   ReimbursementsTable:
     Type: AWS::DynamoDB::Table
     Properties:
