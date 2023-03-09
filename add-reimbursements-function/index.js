@@ -12,8 +12,7 @@ exports.handler = async (event) => {
       const payload = await authService.authorizeEmployee(event.headers.authorization);
   
       await reimbService.addReimbursement(payload.username, bodyObject);
-  
-      return response = {
+      return {
         'statusCode': 200,
         headers: {
           "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
