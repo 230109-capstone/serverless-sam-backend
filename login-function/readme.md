@@ -48,7 +48,7 @@
     * Content-Type: application/json
 4. Unsuccessful login due to no input for username and/or password
 * Status code
-    * 500 Bad Request
+    * 500 Internal Server Error
 
 * Body
 ```JSON
@@ -60,7 +60,7 @@
 5. Unsuccessful login due to unknown error
 input for username and/or password
 * Status code
-    * 500 Bad Request
+    * 500 Internal Server Error
 
 * Body
 ```JSON
