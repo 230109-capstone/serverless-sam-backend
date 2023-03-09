@@ -18,7 +18,6 @@ Globals:
       AddDefaultAuthorizerToCorsPreflight: false
 
 Resources:
-
   TestFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -31,11 +30,6 @@ Resources:
           Properties:
             Path: /test
             Method: get
-  TestFunctionLogGroupSub:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub '/aws/lambda/${TestFunction}'
-      RetentionInDays: 30
   ApproveDenyFunction:
     Type: AWS::Serverless::Function
     Properties:
