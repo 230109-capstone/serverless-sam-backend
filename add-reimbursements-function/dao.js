@@ -6,7 +6,7 @@ AWS.config.update({
 
 const documentClient = new AWS.DynamoDB.DocumentClient();
 
-function addReimbursement(reimbId, amount, description, status, submitter) {
+function addReimbursement(reimbId, amount, description, status, submitter, imageUrl) {
   return documentClient.put({
     TableName: process.env.REIMBURSEMENTS_TABLE_NAME,
     Item: {
@@ -14,7 +14,8 @@ function addReimbursement(reimbId, amount, description, status, submitter) {
       amount: amount,
       description: description,
       status: status,
-      submitter: submitter
+      submitter: submitter,
+      imageUrl
     }
   }).promise();
 }
