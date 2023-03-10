@@ -133,11 +133,25 @@ Resources:
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
-       
+        - AttributeName: submitter
+          AttributeType: S
       KeySchema:
         - AttributeName: id
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: submitterIndex
+          KeySchema:
+            - AttributeName: submitter
+              KeyType: HASH
+          Projection:
+            NonKeyAttributes:
+              - amount
+              - description
+              - status
+              - imageUrl
+            ProjectionType: INCLUDE
+
       
   UsersTable:
     Type: AWS::DynamoDB::Table
