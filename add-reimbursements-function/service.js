@@ -2,13 +2,11 @@ const uuid = require('uuid');
 const { fromBuffer } = require('file-type-cjs');
 
 const reimbDao = require('./dao');
-const s3Dao = require('./dao');
 
-const ReimbursementError = require('./errors');
+const { AuthorizationError, ReimbursementError } = require('./errors');
 
 const jwtUtil = require('./utility');
 
-const AuthorizationError = require('./errors');
 const { JsonWebTokenError } = require('jsonwebtoken');
 
 async function addReimbursement(username, reimbursement) {
@@ -38,7 +36,7 @@ async function addReimbursement(username, reimbursement) {
     const reimbId = uuid.v4();
     const reimbursementUrl = "https://trng-1558-receiptsbucket-1jzdtew6uzdv8.s3.amazonaws.com/"+ reimbId + "." + ext;
     await reimbDao.addReimbursement(reimbId, reimbursement.amount, reimbursement.description, "pending", username, reimbursementUrl);
-    await s3Dao.addReimbursementImage(reimbId, imageBuffer, ext)
+    await reimbDao.addReimbursementImage(reimbId, imageBuffer, ext)
   }
 
   async function authorizeEmployee(authorizationHeader) {
@@ -48,9 +46,8 @@ async function addReimbursement(username, reimbursement) {
   
     const token = authorizationHeader.split(" ")[1];
     const payload = await jwtUtil.verifyTokenAndReturnPayload(token);
-  
     if (payload.role !== 'employee') {
-      throw new AuthorizationError(["Employee role required"]);
+      throw new AuthorizationError("Employee role required");
     }
   
     return payload;
