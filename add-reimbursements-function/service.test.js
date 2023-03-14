@@ -1,7 +1,5 @@
-const AuthorizationError= require('./errors');
-const ReimbursementError= require('./errors');
+const { AuthorizationError, ReimbursementError } = require('./errors');
 const { JsonWebTokenError } = require('jsonwebtoken');
-// const {addReimbursement, authorizeEmployee} = require('./service');
 const service = require('./service');
 const {addReimbursement, addReimbursementImage} = require('./dao');
 
@@ -32,6 +30,11 @@ describe ('Add Reimbursements tests', () => {
 ).rejects.toThrow(ReimbursementError);
 
     });
+
+    test('Successfully add reimbursement', async() => {
+        await expect(service.addReimbursement( "Victor", {"amount": 100, "description": "Food", "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYAB"}))
+    });
+
 })
 
 describe ('Authorization tests', () => {
@@ -41,11 +44,13 @@ describe ('Authorization tests', () => {
 
     });
 
-//     test ('Employee role required', async() => {
-//         await expect(service.authorizeEmployee("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbmFnZXIxIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjc2NzQwMTk3LCJleHAiOjE2Nzc2MDQxOTd9.iqn2YJm_CMzJugiHdg2mFLUlY2DaplmLLAR0ULSf7Qg")
-// ).rejects.toThrow(AuthorizationError);
+     test ('Employee role required', async() => {
+         await expect(service.authorizeEmployee("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWludXNlciIsInJvbGUiOiJmaW5hbmNlX21hbmFnZXIiLCJpYXQiOjE2Nzg3MzcxNjl9.FGQkVkKebOzRpLxFmR0ZADYa-Z_Fa6P3-B4dAyL_gvY")
+ ).rejects.toThrow(AuthorizationError);
 
-//     });
+     });
 
-    
+     test('Successfully provided token with employee role', async() => {
+        await expect(service.authorizeEmployee( "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld1VzZXIxIiwicm9sZSI6ImVtcGxveWVlIiwiaWF0IjoxNjc4NzE5NDI5fQ.FHlfE71w7dcPbaZClrCt91hfXsdYhaJ4_EEwUMdJYb8" ))
+    });
 });
