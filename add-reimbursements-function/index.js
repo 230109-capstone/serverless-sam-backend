@@ -1,6 +1,5 @@
 const { JsonWebTokenError } = require('jsonwebtoken');
-const ReimbursementError = require('./errors');
-const AuthorizationError = require('./errors');
+const {ReimbursementError, AuthorizationError} = require('./errors');
 
 const authService = require('./service');
 const reimbService = require('./service');

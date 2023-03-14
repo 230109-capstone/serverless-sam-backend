@@ -12,5 +12,7 @@ class ReimbursementError extends Error {
     }
 }
 
-module.exports.AuthorizationError = AuthorizationError;
-module.exports.ReimbursementError = ReimbursementError;
+module.exports = {
+    AuthorizationError,
+    ReimbursementError
+}
