@@ -136,7 +136,7 @@ async function approveDenyReimbursements(reimbursement) {
 // Database Query for current reimbursement by ID
 function retrieveReimbursementById(id) {
     return documentClient.get({
-        TableName: 'reimbursements',
+        TableName: process.env.REIMBURSEMENTS_TABLE_NAME,
         Key: {
             id: id
         }
