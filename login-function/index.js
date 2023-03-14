@@ -22,8 +22,8 @@ exports.handler = async (event) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "OPTIONS, POST",
-        "Access-Control-Allow-Headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-      },
+        "Access-Control-Allow-headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", 
+    },
       body: JSON.stringify({
         "message": "Login successful",
         "token": token
@@ -37,8 +37,8 @@ exports.handler = async (event) => {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "OPTIONS, POST",
-          "Access-Control-Allow-Headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-        },
+          "Access-Control-Allow-headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+      },
         body: JSON.stringify({
           "errors": err.errors
         })
@@ -50,8 +50,8 @@ exports.handler = async (event) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "OPTIONS, POST",
-        "Access-Control-Allow-Headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-      },
+        "Access-Control-Allow-headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", 
+    },
       body: JSON.stringify({
         "errors": [err.message]
       })
