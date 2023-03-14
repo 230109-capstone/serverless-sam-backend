@@ -39,7 +39,7 @@ Resources:
         Test:
           Type: Api
           Properties:
-            Path: /reimbursements/:id/status
+            Path: /reimbursements
             Method: patch
   RegisterFunction:
     Type: AWS::Serverless::Function
