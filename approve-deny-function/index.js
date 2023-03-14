@@ -146,7 +146,7 @@ function retrieveReimbursementById(id) {
 // Database Update for reimbursement
 function updateReimbursementStatus(id, status) {
     return documentClient.update({
-        TableName: 'reimbursements',
+        TableName: process.env.REIMBURSEMENTS_TABLE_NAME,
         Key: {
             id: id
         },
