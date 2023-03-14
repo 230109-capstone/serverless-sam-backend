@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const jwt = require('jsonwebtoken');
+const { JsonWebTokenError } = require('jsonwebtoken');
 const documentClient = new AWS.DynamoDB.DocumentClient();
 const ReimbursementError = require('./errors');
 const AuthorizationError = require('./errors');
