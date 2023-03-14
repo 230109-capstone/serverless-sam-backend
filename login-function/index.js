@@ -1,5 +1,6 @@
 const { login } = require('./login-service')
 const LoginError = require('./login-errors')
+const { retrieveUserByUsername } = require("./login-dao")
 
 
 
