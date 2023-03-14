@@ -35,7 +35,7 @@ async function addReimbursement(username, reimbursement) {
   
     const reimbId = uuid.v4();
     const reimbursementUrl = "https://trng-1558-receiptsbucket-1jzdtew6uzdv8.s3.amazonaws.com/"+ reimbId + "." + ext;
-    await reimbDao.addReimbursement(reimbId, reimbursement.amount, reimbursement.description, "pending", username, reimbursementUrl);
+    await reimbDao.addReimbursement(reimbId, reimbursement.amount, reimbursement.description, "PENDING", username, reimbursementUrl);
     await reimbDao.addReimbursementImage(reimbId, imageBuffer, ext)
   }
 
