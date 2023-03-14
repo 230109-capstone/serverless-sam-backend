@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
             statusCode: 200,
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS, POST",
+                "Access-Control-Allow-Methods": "OPTIONS, PATCH",
                 "Access-Control-Allow-headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", 
             },
             body: JSON.stringify({
@@ -30,7 +30,7 @@ exports.handler = async (event, context) => {
                 statusCode: 401,
                 headers: {
                     "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "OPTIONS, POST",
+                    "Access-Control-Allow-Methods": "OPTIONS, PATCH",
                     "Access-Control-Allow-headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", 
                 },
                 body: JSON.stringify({
@@ -44,7 +44,7 @@ exports.handler = async (event, context) => {
                 statusCode: 400,
                 headers: {
                     "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "OPTIONS, POST",
+                    "Access-Control-Allow-Methods": "OPTIONS, PATCH",
                     "Access-Control-Allow-headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", 
                 },
                 body: JSON.stringify({
@@ -58,7 +58,7 @@ exports.handler = async (event, context) => {
                 statusCode: 401,
                 headers: {
                     "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "OPTIONS, POST",
+                    "Access-Control-Allow-Methods": "OPTIONS, PATCH",
                     "Access-Control-Allow-headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", 
                 },
                 body: JSON.stringify({
@@ -71,7 +71,7 @@ exports.handler = async (event, context) => {
             statusCode: 500,
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS, POST",
+                "Access-Control-Allow-Methods": "OPTIONS, PATCH",
                 "Access-Control-Allow-headers": "Content-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", 
             },
             body: JSON.stringify({
