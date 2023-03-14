@@ -15,7 +15,8 @@ exports.handler = async (event) => {
     }
 
     const token = await login(username, password);
-
+    const user = await retrieveUserByUsername(username);
+    user.password = null;
 
     return ({
       statusCode: 200,
@@ -26,7 +27,8 @@ exports.handler = async (event) => {
     },
       body: JSON.stringify({
         "message": "Login successful",
-        "token": token
+        "token": token,
+        user
       }),
     });
 
