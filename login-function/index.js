@@ -17,7 +17,7 @@ exports.handler = async (event) => {
 
     const token = await login(username, password);
     const user = await retrieveUserByUsername(username);
-    user.password = null;
+    delete user.Item.password;
 
     return ({
       statusCode: 200,
