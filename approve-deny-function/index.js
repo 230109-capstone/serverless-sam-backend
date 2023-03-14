@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
     try {
         await authorizeFinanceManager(event.headers.authorization);
 
-        await approveDenyReimbursements(path.id, body.status);
+        await approveDenyReimbursements(body);
 
         return {
             statusCode: 200,
@@ -85,17 +85,17 @@ function verifyTokenAndReturnPayload(token) {
     });
 }
 
-async function approveDenyReimbursements(id, status) {
-    const data = await retrieveReimbursementById(id);
+async function approveDenyReimbursements(reimbursement) {
+    const data = await retrieveReimbursementById(reimbursement.id);
 
     const errors = [];
     if (!data.Item) {
-        errors.push(`Reimbursement with id ${id} does not exist`);
-    } else if (data.Item.status !== 'pending') {
+        errors.push(`Reimbursement with id ${reimbursement.id} does not exist`);
+    } else if (data.Item.status !== 'PENDING') {
         errors.push(`Reimbursement must be pending in order to be approved or denied`);
     }
 
-    if (!(status === 'approved' || status === 'denied')) {
+    if (!(reimbursement.status === 'APPROVED' || reimbursement.status === 'DENIED')) {
         errors.push('Updated status must be either approved or denied');
     }
 
@@ -103,7 +103,7 @@ async function approveDenyReimbursements(id, status) {
         throw new ReimbursementError(errors);
     }
 
-    await updateReimbursementStatus(id, status);
+    await updateReimbursementStatus(reimbursement.id, reimbursement.status);
 }
 
 
