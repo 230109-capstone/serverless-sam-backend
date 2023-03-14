@@ -41,6 +41,13 @@ Resources:
           Properties:
             Path: /reimbursements
             Method: patch
+      Environment:
+        Variables:
+          REIMBURSEMENTS_TABLE_NAME: !Ref ReimbursementsTable
+          JWT_SIGNING_SECRET: psstthisisthesecret
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref ReimbursementsTable
   RegisterFunction:
     Type: AWS::Serverless::Function
     Properties:
