@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
     const body = JSON.parse(event.body);
 
     try {
-        await authorizeFinanceManager(event.headers.authorization);
+        await authorizeFinanceManager(event.headers.Authorization);
 
         await approveDenyReimbursements(body);
 
